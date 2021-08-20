@@ -8,7 +8,7 @@ import java.time.LocalDate;
 @Table(name = "produto")
 public class Produto {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY )
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String nome;
     private String descricao;
@@ -17,7 +17,7 @@ public class Produto {
     private LocalDate dataCriacao;
     private LocalDate dataAlteracao;
 
-    public Produto(){
+    public Produto() {
     }
 
     public Produto(String nome, String descricao, Integer quantidade, BigDecimal preco) {
@@ -25,6 +25,7 @@ public class Produto {
         this.descricao = descricao;
         this.quantidade = quantidade;
         this.preco = preco;
+        this.dataCriacao = LocalDate.now();
     }
 
     public long getId() {
@@ -79,8 +80,22 @@ public class Produto {
         return dataAlteracao;
     }
 
-    public void setDataAlteracao(LocalDate dataAlteracao) {
-        this.dataAlteracao = dataAlteracao;
+    public void setDataAlteracao() {
+        this.dataAlteracao = LocalDate.now();
     }
 
+    @Override
+    public String toString() {
+        return "===============================" +
+                "\nInformações do produto:" +
+                "\nID=" + id +
+                "\nNome=" + nome +
+                "\nDescrição= " + descricao +
+                "\nQuantidade= " + quantidade +
+                "\nPreco= " + preco +
+                "\nData de Criação= " + dataCriacao +
+                "\nData de Alteração= " + dataAlteracao +
+                "\n==============================="
+                ;
+    }
 }

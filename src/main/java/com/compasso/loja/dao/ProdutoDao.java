@@ -20,6 +20,7 @@ public class ProdutoDao {
 
     public void atualizar(Produto produto) {
         this.em.merge(produto);
+        produto.setDataAlteracao();
     }
 
     public void remover(Produto produto) {

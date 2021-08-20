@@ -16,9 +16,10 @@ public class main {
         celular.setPreco(new BigDecimal("800"));
 */
 
-        EntityManager em = JPAutil.getEntityManager();
-        ProdutoDao dao = new ProdutoDao(em);
+
         while(true){
+            EntityManager em = JPAutil.getEntityManager();
+            ProdutoDao dao = new ProdutoDao(em);
             System.out.println("Escolha uma opção" +
                     "\n1 - Para cadastrar produtos" +
                     "\n2 - Para atualizar o primeiro produto" +
@@ -30,6 +31,10 @@ public class main {
 
                 case 1:
                     System.out.println("Cadastrando produtos");
+                    //String nome, String descricao, Integer quantidade, BigDecimal preco
+                    Produto notebook = new Produto("Notebook", "Notebook Inspiron 15 3000", 3, new BigDecimal("2851"));
+                    cadastrar(notebook, em, dao);
+
                     break;
                 case 2:
                     System.out.println("Atualizando o primeiro produto");
@@ -59,6 +64,9 @@ public class main {
         em.getTransaction().begin();
         dao.cadastrar(produto);
         em.getTransaction().commit();
+        for(Produto x: dao.buscarTodos()){
+            System.out.println(x);
+        }
         em.close();
 
     }

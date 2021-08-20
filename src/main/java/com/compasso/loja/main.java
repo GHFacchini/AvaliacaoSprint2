@@ -6,6 +6,7 @@ import com.compasso.loja.util.JPAutil;
 
 import javax.persistence.EntityManager;
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Scanner;
 
 public class main {
@@ -37,18 +38,26 @@ public class main {
                     Produto chocolate = new Produto("Barra de chocolate Milka", "Barra de chocolate Milka Oreo 100g", 10, new BigDecimal("16.90"));
                     cadastrar3Produtos(notebook, tablet, chocolate, em, dao);
 
+                    fechar(em);
+
                     break;
                 case 2:
                     System.out.println("Atualizando o primeiro produto");
+
+                    fechar(em);
                     break;
                 case 3:
                     System.out.println("Excluindo o segundo produto");
-                    Produto produto = dao.buscarPorId(2l);
-                    excluir(produto, em, dao);
+
+                    excluirN(2, em, dao);
+
+                    fechar(em);
                     break;
                 case 0:
                     System.out.println("Terminando execução");
                     System.exit(0);
+
+                    fechar(em);
                     break;
                 default:
                     System.out.println("Valor inválido");
@@ -81,17 +90,28 @@ public class main {
         for (Produto x : dao.buscarTodos()) {
             System.out.println(x);
         }
-        em.close();
     }
 
-    public static void excluir(Produto produto, EntityManager em, ProdutoDao dao) {
-        em.getTransaction().begin();
+    public static void excluirN(int n, EntityManager em, ProdutoDao dao) {
+        Produto produto = buscarN(n,em,dao);
         dao.remover(produto);
         em.getTransaction().commit();
         for (Produto x : dao.buscarTodos()) {
             System.out.println(x);
         }
-        em.close();
-
     }
+
+    public static Produto buscarN(int n, EntityManager em, ProdutoDao dao) {
+        em.getTransaction().begin();
+        Produto produto = dao.buscarN(n);
+        if (produto != null ) {
+            System.out.println(produto);
+        }
+        return produto;
+    }
+    public static void fechar(EntityManager em){
+        em.close();
+    }
+
 }
+

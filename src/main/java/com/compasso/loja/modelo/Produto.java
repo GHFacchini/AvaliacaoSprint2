@@ -88,8 +88,8 @@ public class Produto {
     public String toString() {
         return "===============================" +
                 "\nInformações do produto:" +
-                "\nID=" + id +
-                "\nNome=" + nome +
+                "\nID= " + id +
+                "\nNome= " + nome +
                 "\nDescrição= " + descricao +
                 "\nQuantidade= " + quantidade +
                 "\nPreco= " + preco +

@@ -37,6 +37,23 @@ public class ProdutoDao {
         return em.createQuery(jpql, Produto.class).getResultList();
     }
 
+    public Produto buscarN(int n) {
+        Produto resultado = null;
+        try {
+            String jpql = "SELECT p FROM Produto p ";
+            resultado = em.createQuery(jpql, Produto.class).setMaxResults(1).setFirstResult(n - 1).getSingleResult();
+            System.out.println(resultado);
+        } catch (Exception e) {
+            System.out.println("Registro não encontrado");
+            System.out.println(e.getMessage());
+
+        }finally {
+            return resultado;
+        }
+
+    }
+
+
     public List<Produto> buscarPorNome(String nome) {
         String jpql = "SELECT p FROM Produto p WHERE p.nome = :nome";
         return em.createQuery(jpql, Produto.class).setParameter("nome", nome).getResultList();

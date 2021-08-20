@@ -24,8 +24,10 @@ public class ProdutoDao {
     }
 
     public void remover(Produto produto) {
-        produto = em.merge(produto);
-        this.em.remove(produto);
+        if(produto != null) {
+            produto = em.merge(produto);
+            this.em.remove(produto);
+        }
     }
 
     public Produto buscarPorId(Long id) {

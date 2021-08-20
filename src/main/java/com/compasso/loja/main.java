@@ -51,7 +51,7 @@ public class main {
                     System.exit(0);
                     break;
                 default:
-                    System.out.println("Valor inválido");
+                    System.out.println("Valor inválido teste teste");
                     break;
             }
 

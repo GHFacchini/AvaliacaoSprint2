@@ -34,7 +34,7 @@ public class main {
                     //String nome, String descricao, Integer quantidade, BigDecimal preco
                     Produto notebook = new Produto("Notebook Dell", "Notebook Inspiron 15 3000", 3, new BigDecimal("2851"));
                     Produto tablet = new Produto("Tablet Samsung", "Samsung Galaxy Tab S6 Lite", 2, new BigDecimal("2218"));
-                    Produto chocolate = new Produto("Barra de chocolate Milka", " Barra de chocolate Milka Oreo 100g", 10, new BigDecimal("16.90"));
+                    Produto chocolate = new Produto("Barra de chocolate Milka", "Barra de chocolate Milka Oreo 100g", 10, new BigDecimal("16.90"));
                     cadastrar3Produtos(notebook, tablet, chocolate, em, dao);
 
                     break;
@@ -51,7 +51,7 @@ public class main {
                     System.exit(0);
                     break;
                 default:
-                    System.out.println("Valor inválido teste teste");
+                    System.out.println("Valor inválido");
                     break;
             }
 

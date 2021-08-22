@@ -28,15 +28,12 @@ public class ProdutoDao {
         this.em.remove(produto);
     }
 
-    public Produto buscarPorId(Long id) {
-        return em.find(Produto.class, id);
-    }
-
     public List<Produto> buscarTodos() {
         String jpql = "SELECT p FROM Produto p ";
         return em.createQuery(jpql, Produto.class).getResultList();
     }
 
+    //busca o produto na posição n do banco de dados
     public Produto buscarN(int n) {
         Produto resultado = null;
         try {
@@ -46,10 +43,9 @@ public class ProdutoDao {
         } catch (Exception e) {
             System.out.println("Registro não encontrado");
             System.out.println(e.getMessage());
-
-        } finally {
-            return resultado;
         }
+        return resultado;
+
 
     }
 
@@ -59,6 +55,7 @@ public class ProdutoDao {
         return em.createQuery(jpql, Produto.class).setParameter("nome", nome).getResultList();
     }
 
+    //busca a ultima ocorrência de um determinado produto no banco de dados
     public Produto buscarUltimo(String nome) {
         try {
             List<Produto> resultado = buscarPorNome(nome);

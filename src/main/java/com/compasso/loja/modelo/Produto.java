@@ -32,9 +32,6 @@ public class Produto {
         return id;
     }
 
-    public void setId(long id) {
-        this.id = id;
-    }
 
     public String getNome() {
         return nome;
@@ -70,10 +67,6 @@ public class Produto {
 
     public LocalDate getDataCriacao() {
         return dataCriacao;
-    }
-
-    public void setDataCriacao(LocalDate dataCriacao) {
-        this.dataCriacao = dataCriacao;
     }
 
     public LocalDate getDataAlteracao() {

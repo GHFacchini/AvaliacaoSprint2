@@ -27,13 +27,13 @@ public class main {
                     Produto notebook = new Produto("Notebook Dell", "Notebook Inspiron 15 3000", 3, new BigDecimal("2851"));
                     Produto tablet = new Produto("Tablet Samsung", "Samsung Galaxy Tab S6 Lite", 2, new BigDecimal("2218"));
                     Produto chocolate = new Produto("Barra de chocolate Milka", "Barra de chocolate Milka Oreo 100g", 10, new BigDecimal("16.90"));
-                    cadastrar3Produtos(notebook,tablet,chocolate, em, dao);
+                    cadastrar3Produtos(notebook, tablet, chocolate, em, dao);
 
                     fecharConexao(em);
                     break;
                 case 2:
                     System.out.println("Atualizando o primeiro produto");
-                    atualizarUltimo("Notebook Dell",em,dao);
+                    atualizarUltimo("Notebook Dell", em, dao);
                     fecharConexao(em);
                     break;
                 case 3:
@@ -58,22 +58,23 @@ public class main {
 
     }
 
+    //pode ser utilizado para cadastrar um produto
     public static void cadastrar(Produto produto, EntityManager em, ProdutoDao dao) {
-        try{
+        try {
             em.getTransaction().begin();
             dao.cadastrar(produto);
             em.getTransaction().commit();
-            System.out.println("O produto:"+ produto.getNome() +" foi cadastrado com sucesso" +
-                    "\n"+produto);
-            } catch (Exception e){
+            System.out.println("O produto:" + produto.getNome() + " foi cadastrado com sucesso" +
+                    "\n" + produto);
+        } catch (Exception e) {
             em.getTransaction().rollback();
             System.out.println(e.getMessage());
         }
 
 
-
     }
 
+    //cadastra automaticamente 3 produtos caso ocorra algum problema em algum deles efetua um rollback
     public static void cadastrar3Produtos(Produto produto1, Produto produto2, Produto produto3,
                                           EntityManager em, ProdutoDao dao) {
         try {
@@ -89,7 +90,9 @@ public class main {
             System.out.println(e.getMessage());
         }
     }
-    public static void excluirUltimo(String nome,EntityManager em, ProdutoDao dao) {
+
+    //exclui a última inserção do segundo produto cadastrado na primeira opção
+    public static void excluirUltimo(String nome, EntityManager em, ProdutoDao dao) {
         em.getTransaction().begin();
         Produto referenciaProduto = dao.buscarUltimo(nome);
         if (referenciaProduto != null) {
@@ -101,11 +104,13 @@ public class main {
         }
 
     }
-    public static void atualizarUltimo(String nome,EntityManager em, ProdutoDao dao) {
+
+    //atualiza a última inserção do primeiro produto cadastrado primeiro opção
+    public static void atualizarUltimo(String nome, EntityManager em, ProdutoDao dao) {
         em.getTransaction().begin();
         Produto referenciaProduto = dao.buscarUltimo(nome);
         if (referenciaProduto != null) {
-            referenciaProduto.setQuantidade(referenciaProduto.getQuantidade()-1); //remove uma unidade do produto
+            referenciaProduto.setQuantidade(referenciaProduto.getQuantidade() - 1); //remove uma unidade do produto
             dao.atualizar(referenciaProduto);
             em.getTransaction().commit();
             System.out.println("O Produto: " + referenciaProduto.getNome() +
@@ -115,7 +120,11 @@ public class main {
 
     }
 
+    public static void fecharConexao(EntityManager em) {
+        em.close();
+    }
 
+    //exclui o produto na posição n do banco de dados
     /*public static void excluirN(int n, EntityManager em, ProdutoDao dao) {
         Produto produto = buscarN(n, em, dao);
         if (produto != null) {
@@ -127,7 +136,7 @@ public class main {
         }
 
     }*/
-
+    //busca o produto na posição n do banco de dados
     /*public static Produto buscarN(int n, EntityManager em, ProdutoDao dao) {
         em.getTransaction().begin();
         Produto produto = dao.buscarN(n);
@@ -137,9 +146,6 @@ public class main {
         return produto;
     }*/
 
-    public static void fecharConexao(EntityManager em) {
-        em.close();
-    }
 
 }
 

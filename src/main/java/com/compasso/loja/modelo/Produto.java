@@ -89,10 +89,10 @@ public class Produto {
         return "===============================" +
                 "\nInformações do produto:" +
                 "\nID= " + id +
-                "\nNome= " + nome +
+                "\nNome= |" + nome +
                 "\nDescrição= " + descricao +
                 "\nQuantidade= " + quantidade +
-                "\nPreco= " + preco +
+                "\nPreco= R$" + preco +
                 "\nData de Criação= " + dataCriacao +
                 "\nData de Alteração= " + dataAlteracao +
                 "\n==============================="

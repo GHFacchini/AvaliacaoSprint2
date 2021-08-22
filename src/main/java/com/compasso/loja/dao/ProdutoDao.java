@@ -24,10 +24,8 @@ public class ProdutoDao {
     }
 
     public void remover(Produto produto) {
-        if(produto != null) {
-            produto = em.merge(produto);
-            this.em.remove(produto);
-        }
+        produto = em.merge(produto);
+        this.em.remove(produto);
     }
 
     public Produto buscarPorId(Long id) {
@@ -49,7 +47,7 @@ public class ProdutoDao {
             System.out.println("Registro não encontrado");
             System.out.println(e.getMessage());
 
-        }finally {
+        } finally {
             return resultado;
         }
 
@@ -59,6 +57,17 @@ public class ProdutoDao {
     public List<Produto> buscarPorNome(String nome) {
         String jpql = "SELECT p FROM Produto p WHERE p.nome = :nome";
         return em.createQuery(jpql, Produto.class).setParameter("nome", nome).getResultList();
+    }
+
+    public Produto buscarUltimo(String nome) {
+        try {
+            List<Produto> resultado = buscarPorNome(nome);
+            return resultado.get(resultado.size() - 1);
+        } catch (Exception e) {
+            System.out.println("Este produto não está cadastrado");
+            return null;
+        }
+
     }
 
 
